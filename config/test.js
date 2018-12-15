@@ -1,7 +1,7 @@
 module.exports = {
   validCredentials: {
-    username: 'react',
-    password: 'express'
+    username: 'Antoine',
+    password: 'password'
   }
 };
 

@@ -3,10 +3,19 @@ const httpStatus = require('http-status');
 const chai = require('chai'); // eslint-disable-line import/newline-after-import
 const expect = chai.expect;
 const app = require('../../index');
+const { loginBefore } = require('../helpers/test');
+
+
+let jwtToken;
+const setToken = (token) => { jwtToken = token; };
 
 chai.config.includeStack = true;
 
+
 describe('## Misc', () => {
+  before((done) => {
+    loginBefore(done, setToken);
+  });
   describe('# GET /api/health-check', () => {
     it('should return OK', (done) => {
       request(app)
@@ -37,6 +46,7 @@ describe('## Misc', () => {
     it('should handle mongoose CastError - Cast to ObjectId failed', (done) => {
       request(app)
         .get('/api/users/56z787zzz67fc')
+        .set('Authorization', jwtToken)
         .expect(httpStatus.INTERNAL_SERVER_ERROR)
         .then((res) => {
           expect(res.body.message).to.equal('Internal Server Error');
@@ -45,15 +55,16 @@ describe('## Misc', () => {
         .catch(done);
     });
 
-    it('should handle express validation error - username is required', (done) => {
+    it('should handle express validation error - password is required', (done) => {
       request(app)
         .post('/api/users')
+        .set('Authorization', jwtToken)
         .send({
-          mobileNumber: '1234567890'
+          username: 'Hugo'
         })
         .expect(httpStatus.BAD_REQUEST)
         .then((res) => {
-          expect(res.body.message).to.equal('"username" is required');
+          expect(res.body.message).to.equal('"password" is required');
           done();
         })
         .catch(done);

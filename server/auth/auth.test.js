@@ -5,15 +5,11 @@ const chai = require('chai'); // eslint-disable-line import/newline-after-import
 const expect = chai.expect;
 const app = require('../../index');
 const config = require('../../config/config');
+const { validCredentials } = require('../../config/test');
 
 chai.config.includeStack = true;
 
 describe('## Auth APIs', () => {
-  const validUserCredentials = {
-    username: 'react',
-    password: 'express'
-  };
-
   const invalidUserCredentials = {
     username: 'react',
     password: 'IDontKnow'
@@ -37,13 +33,13 @@ describe('## Auth APIs', () => {
     it('should get valid JWT token', (done) => {
       request(app)
         .post('/api/auth/login')
-        .send(validUserCredentials)
+        .send(validCredentials)
         .expect(httpStatus.OK)
         .then((res) => {
           expect(res.body).to.have.property('token');
           jwt.verify(res.body.token, config.jwtSecret, (err, decoded) => {
             expect(err).to.not.be.ok; // eslint-disable-line no-unused-expressions
-            expect(decoded.username).to.equal(validUserCredentials.username);
+            expect(decoded.username).to.equal(validCredentials.username);
             jwtToken = `Bearer ${res.body.token}`;
             done();
           });
