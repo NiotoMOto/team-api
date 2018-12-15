@@ -1,24 +1,4 @@
-# Express & mongoose REST API Boilerplate in ES6 with Code Coverage [![Awesome](https://cdn.rawgit.com/sindresorhus/awesome/d7305f38d29fed78fa85652e3a63e154dd8e8829/media/badge.svg)](https://github.com/sindresorhus/awesome)
-
-[![Build Status](https://img.shields.io/travis/kunalkapadia/express-mongoose-es6-rest-api/master.svg?style=flat-square)](https://travis-ci.org/kunalkapadia/express-mongoose-es6-rest-api)
-[![Coverage Status](https://img.shields.io/coveralls/kunalkapadia/express-mongoose-es6-rest-api/master.svg?style=flat-square)](https://coveralls.io/github/kunalkapadia/express-mongoose-es6-rest-api?branch=master)
-[![Code Climate](https://img.shields.io/codeclimate/github/kunalkapadia/express-mongoose-es6-rest-api.svg?style=flat-square)](https://codeclimate.com/github/kunalkapadia/express-mongoose-es6-rest-api)
-[![bitHound Overall Score](https://www.bithound.io/github/kunalkapadia/express-es6-rest-api-starter/badges/score.svg)](https://www.bithound.io/github/kunalkapadia/express-es6-rest-api-starter)
-[![bitHound Dependencies](https://www.bithound.io/github/kunalkapadia/express-mongoose-es6-rest-api/badges/dependencies.svg)](https://www.bithound.io/github/kunalkapadia/express-mongoose-es6-rest-api/master/dependencies/npm)
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg?style=flat-square)](http://commitizen.github.io/cz-cli/)
-[![MIT License](https://img.shields.io/npm/l/stack-overflow-copy-paste.svg?style=flat-square)](http://opensource.org/licenses/MIT)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![Support via Paypal](https://img.shields.io/badge/support-paypal-yellowgreen.svg?style=flat-square)](https://www.paypal.me/KunalKapadia)
-
-[![Code Sponsor](https://app.codesponsor.io/embed/J9YBdeLoqYqrG8tmMKF4p6Pv/kunalkapadia/express-mongoose-es6-rest-api.svg)](https://app.codesponsor.io/link/J9YBdeLoqYqrG8tmMKF4p6Pv/kunalkapadia/express-mongoose-es6-rest-api)
-
-# [![Express ES6 REST API Starter](https://cloud.githubusercontent.com/assets/4172932/12660610/90f5b856-c63a-11e5-878e-c9f0bbf33090.jpg)](https://github.com/kunalkapadia/express-mongoose-es6-rest-api)
-
-## Overview
-
-This is a boilerplate application for building REST APIs in Node.js using ES6 and Express with Code Coverage and JWT Authentication. Helps you stay productive by following best practices. Follows [Airbnb's Javascript style guide](https://github.com/airbnb/javascript).
-
-Heavily inspired from [Egghead.io - How to Write an Open Source JavaScript Library](https://egghead.io/courses/how-to-write-an-open-source-javascript-library).
+# Team api
 
 ### Features
 
@@ -44,8 +24,8 @@ Heavily inspired from [Egghead.io - How to Write an Open Source JavaScript Libra
 
 Clone the repo:
 ```sh
-git clone git@github.com:kunalkapadia/express-mongoose-es6-rest-api.git
-cd express-mongoose-es6-rest-api
+git https://github.com/NiotoMOto/team-api.git
+cd teamp-api
 ```
 
 Install yarn:
@@ -163,29 +143,3 @@ docker build -t express-mongoose-es6-rest-api .
 # Run docker
 docker run -p 4040:4040 express-mongoose-es6-rest-api
 ```
-
-
-## A Boilerplate-only Option
-
-If you would prefer not to use any of our tooling, delete the following files from the project: `package.json`, `gulpfile.babel.js`, `.eslintrc` and `.travis.yml`. You can now safely use the boilerplate with an alternative build-system or no build-system at all if you choose.
-
-## Docs and Recipes
-
-* [Gulp recipes](https://github.com/gulpjs/gulp/tree/master/docs/recipes) - the official Gulp recipes directory includes a comprehensive list of guides for different workflows you can add to your project.
-
-## Contributing
-
-Contributions, questions and comments are all welcome and encouraged. For code contributions submit a pull request with unit test.
-
-## License
-This project is licensed under the [MIT License](https://github.com/kunalkapadia/express-mongoose-es6-rest-api/blob/master/LICENSE)
-
-## Support Development
-If this project saved your valuable time in getting your service up, and you feel like buying me coffee, you can donate either at my BTC address: `1LkW5UoERR1jjJsChMheKuo6vn95x2mzWg` or at [![Support via Paypal](https://img.shields.io/badge/support-paypal-yellowgreen.svg?style=flat-square)](https://www.paypal.me/KunalKapadia)
-
-Your support is greatly appreciated.
-
-## Meta
-
-Kunal Kapadia – [@kunalkapadia12](https://twitter.com/kunalkapadia12) – kunalkapadia12@gmail.com
-
