@@ -53,11 +53,13 @@ UserSchema.pre('save', function (next) {
  * Methods
  */
 UserSchema.method({
-  comparePassword(candidatePassword, cb) {
-    bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
-      if (err) return cb(err);
-      cb(null, isMatch);
-    });
+  comparePassword(candidatePassword) {
+    return new Promise((resolve, reject) =>
+      bcrypt.compare(candidatePassword, this.password, (err, isMatch) => {
+        if (err) return reject(err);
+        if (isMatch) return resolve(this);
+        reject(new Error('password dont match'));
+      }));
   }
 });
 

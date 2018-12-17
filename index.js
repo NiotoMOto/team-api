@@ -4,6 +4,8 @@ const util = require('util');
 // config should be imported before importing any other file
 const config = require('./config/config');
 const app = require('./config/express');
+const cors = require('cors');
+
 
 const debug = require('debug')('express-mongoose-es6-rest-api:index');
 
@@ -26,6 +28,8 @@ if (config.mongooseDebug) {
     debug(`${collectionName}.${method}`, util.inspect(query, false, 20), doc);
   });
 }
+
+app.use(cors());
 
 // module.parent check is required to support mocha watch
 // src: https://github.com/mochajs/mocha/issues/1912

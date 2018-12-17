@@ -13,27 +13,23 @@ const UserModel = require('../user/user.model');
  * @returns {*}
  */
 function login(req, res, next) {
-  // Ideally you'll fetch this from the db
-  // Idea here was to show how jwt works with simplicity
-  UserModel.findOne({ username: req.body.username }).then((user) => {
-    user.comparePassword(req.body.password, (err, isMatch) => {
-      if (err) {
-        throw new Error(err);
-      }
-      if (isMatch) {
-        const token = jwt.sign({
-          username: user.username
-        }, config.jwtSecret);
-        return res.json({
-          token,
-          username: user.username
-        });
-      }
+  UserModel.findOne({ username: req.body.username })
+    .then(user => (
+      user.comparePassword(req.body.password)
+    ))
+    .then((user) => {
+      const token = jwt.sign({
+        username: user.username
+      }, config.jwtSecret);
+      return res.json({
+        token,
+        username: user.username
+      });
+    })
+    .catch(() => {
+      const err = new APIError('Authentication error', httpStatus.UNAUTHORIZED, true);
+      return next(err);
     });
-  }).catch(() => {
-    const err = new APIError('Authentication error', httpStatus.UNAUTHORIZED, true);
-    return next(err);
-  });
 }
 
 /**
