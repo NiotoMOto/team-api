@@ -23,13 +23,34 @@ function login(req, res, next) {
       }, config.jwtSecret);
       return res.json({
         token,
-        username: user.username
+        username: user.username,
+        id: user._id
       });
     })
     .catch(() => {
       const err = new APIError('Authentication error', httpStatus.UNAUTHORIZED, true);
       return next(err);
     });
+}
+
+function register(req, res, next) {
+  const { username, password } = req.body;
+  UserModel.create({ username, password }).then((user) => {
+    if (user) {
+      const token = jwt.sign({
+        username: user.username
+      }, config.jwtSecret);
+      return res.json({
+        token,
+        username: user.username,
+        id: user._id
+      });
+    }
+    throw new Error('Bad request');
+  }).catch(() => {
+    const err = new APIError('Register error', httpStatus.BAD_REQUEST, true);
+    return next(err);
+  });
 }
 
 /**
@@ -46,4 +67,4 @@ function getRandomNumber(req, res) {
   });
 }
 
-module.exports = { login, getRandomNumber };
+module.exports = { login, getRandomNumber, register };

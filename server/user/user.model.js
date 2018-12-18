@@ -11,7 +11,8 @@ const APIError = require('../helpers/APIError');
 const UserSchema = new mongoose.Schema({
   username: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   createdAt: {
     type: Date,

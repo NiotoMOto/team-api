@@ -6,6 +6,7 @@ const expect = chai.expect;
 const app = require('../../index');
 const config = require('../../config/config');
 const { validCredentials } = require('../../config/test');
+const UserModel = require('../user/user.model');
 
 chai.config.includeStack = true;
 
@@ -15,7 +16,41 @@ describe('## Auth APIs', () => {
     password: 'IDontKnow'
   };
 
+  before(() => (
+    UserModel.remove({ username: validCredentials.username })
+  ));
+
   let jwtToken;
+  describe('# POST /api/auth/register', () => {
+    it('should register new user and return user & jwt token', (done) => {
+      request(app).post('/api/auth/register')
+        .send(validCredentials)
+        .then((res) => {
+          expect(res.body.username).to.equal(validCredentials.username);
+          done();
+        })
+        .catch(done);
+    });
+    it('should return bad request ( duplicate username )', (done) => {
+      request(app).post('/api/auth/register')
+        .send(validCredentials)
+        .then(() => {
+          expect(httpStatus.BAD_REQUEST);
+          done();
+        })
+        .catch(done);
+    });
+    it('should return bad request ( missing username in req.body)', (done) => {
+      request(app).post('/api/auth/register')
+        .send({ password: 'tot' })
+        .then(() => {
+          expect(httpStatus.BAD_REQUEST);
+          done();
+        })
+        .catch(done);
+    });
+  });
+
 
   describe('# POST /api/auth/login', () => {
     it('should return Authentication error', (done) => {
@@ -47,6 +82,7 @@ describe('## Auth APIs', () => {
         .catch(done);
     });
   });
+
 
   describe('# GET /api/auth/random-number', () => {
     it('should fail to get random number because of missing Authorization', (done) => {
