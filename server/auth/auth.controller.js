@@ -19,7 +19,8 @@ function login(req, res, next) {
     ))
     .then((user) => {
       const token = jwt.sign({
-        username: user.username
+        username: user.username,
+        isAdmin: user.isAdmin
       }, config.jwtSecret);
       return res.json({
         token,
@@ -38,7 +39,8 @@ function register(req, res, next) {
   UserModel.create({ username, password }).then((user) => {
     if (user) {
       const token = jwt.sign({
-        username: user.username
+        username: user.username,
+        isAdmin: user.isAdmin
       }, config.jwtSecret);
       return res.json({
         token,

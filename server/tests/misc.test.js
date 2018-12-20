@@ -3,21 +3,27 @@ const httpStatus = require('http-status');
 const chai = require('chai'); // eslint-disable-line import/newline-after-import
 const expect = chai.expect;
 const app = require('../../index');
-const { loginBefore } = require('../helpers/test');
-
+const { loginBefore, createUser, removeUser } = require('../helpers/test');
+const { validAdmin } = require('../../config/test');
 
 let jwtToken;
-const setToken = (token) => { jwtToken = token; };
+const setToken = (token) => {
+  jwtToken = token;
+};
 
 chai.config.includeStack = true;
 
-
 describe('## Misc', () => {
   before((done) => {
-    loginBefore(done, setToken);
+    removeUser(validAdmin)
+      .then(() => createUser(validAdmin))
+      .then(() => loginBefore(validAdmin, setToken))
+      .then(() => done())
+      .catch(err => console.log('MISC BEFORE ERROR', err));
   });
   describe('# GET /api/health-check', () => {
     it('should return OK', (done) => {
+      console.log('TOKKKKEN', jwtToken);
       request(app)
         .get('/api/health-check')
         .expect(httpStatus.OK)

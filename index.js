@@ -7,7 +7,7 @@ const app = require('./config/express');
 const cors = require('cors');
 
 
-const debug = require('debug')('express-mongoose-es6-rest-api:index');
+const debug = require('debug')('team-api');
 
 // make bluebird default Promise
 Promise = require('bluebird'); // eslint-disable-line no-global-assign

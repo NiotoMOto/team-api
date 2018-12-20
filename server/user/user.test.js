@@ -4,12 +4,15 @@ const httpStatus = require('http-status');
 const chai = require('chai'); // eslint-disable-line import/newline-after-import
 const expect = chai.expect;
 const app = require('../../index');
-const { loginBefore } = require('../helpers/test');
+const { loginBefore, createUser, removeUser } = require('../helpers/test');
+const { validAdmin } = require('../../config/test');
 
 chai.config.includeStack = true;
 
 let jwtToken;
-const setToken = (token) => { jwtToken = token; };
+const setToken = (token) => {
+  jwtToken = token;
+};
 
 /**
  * root level hooks
@@ -22,15 +25,19 @@ after((done) => {
   done();
 });
 
-before((done) => {
-  loginBefore(done, setToken);
-});
-
 describe('## User APIs', () => {
   let user = {
     username: 'KK123',
     password: 'AOds'
   };
+
+  before((done) => {
+    removeUser(validAdmin)
+      .then(() => createUser(validAdmin))
+      .then(() => loginBefore(validAdmin, setToken))
+      .then(() => done())
+      .catch(err => console.log('MISC BEFORE ERROR', err));
+  });
 
   describe('# POST /api/users', () => {
     it('should create a new user', (done) => {
